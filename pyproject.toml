@@ -1,0 +1,75 @@
+[project]
+name = "buildtest"
+version = "0.0.1"
+description = "Docker and uv build test setup"
+authors = [
+    {name = "Gary Gale", email = "gary@vicchi.org"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "whoami==0.0.1",
+]
+
+[project.scripts]
+testbed = "buildtest.testbed:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.uv]
+package = true
+
+[tool.uv.sources]
+whoami = { git = "ssh://git@github.com/vicchi/whoami" }
+
+[tool.mypy]
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+check_untyped_defs = true
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["COM","D","Q"]
+
+[tool.bumpversion]
+current_version = "1.0.0"
+parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
+serialize = ["{major}.{minor}.{patch}"]
+search = "{current_version}"
+replace = "{new_version}"
+regex = false
+ignore_missing_version = false
+ignore_missing_files = false
+tag = false
+sign_tags = false
+tag_name = "v{new_version}"
+tag_message = "Bump version: {current_version} → {new_version}"
+allow_dirty = false
+commit = false
+message = "Bump version: {current_version} → {new_version}"
+moveable_tags = []
+commit_args = ""
+setup_hooks = []
+pre_commit_hooks = []
+post_commit_hooks = []
+
+[[tool.bumpversion.files]]
+filename = "VERSION"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9.7",
+]

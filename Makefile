@@ -10,8 +10,9 @@ ENVIRONMENT := build
 VERSION := $(shell cat ./VERSION)
 COMMIT_HASH := $(shell git log -1 --pretty=format:"sha-%h")
 ECR_REPO_ROOT := kamma
-# PLATFORMS := "linux/arm64/v8,linux/amd64"
-PLATFORMS := "linux/amd64"
+PLATFORMS := "linux/arm64/v8,linux/amd64"
+# PLATFORMS := "linux/amd64"
+# PLATFORMS := "linux/arm64/v8"
 
 BUILD_FLAGS ?=
 # BUILD_PROGRESS := auto
